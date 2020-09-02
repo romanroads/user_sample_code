@@ -50,8 +50,8 @@ def test_using_nanomsg_socket():
             payload = payload.decode('unicode_escape')
             dictionary = json.loads(payload)
             timestamp = dictionary["Timestamp"]
-            print(timestamp)
-            socket_control.send(('%s:KeepLane:-1' % timestamp).encode('unicode_escape'))
+            print("[INFO] timestamp %s" % timestamp)
+            socket_control.send(('%s:KeepLane:1.0' % timestamp).encode('unicode_escape'))
     except:
         pass
 
