@@ -24,6 +24,7 @@ import json
 
 try:
     from pynng import Sub0, Pair0
+    import matplotlib.pyplot as plt
 except ModuleNotFoundError:
     pass
 
@@ -32,13 +33,16 @@ LOG_PORT = 5555
 CONTROL_PORT = 5556
 LOG_IP_PORT = "tcp://%s:%s" % (LOG_IP, LOG_PORT)
 CONTROL_IP_PORT = "tcp://%s:%s" % (LOG_IP, CONTROL_PORT)
-TIME_TO_RESTART = 10
+TIME_TO_CHANGE_LANE = 5
+TIME_TO_RESTART = 20
 
 
 def test_using_nanomsg_socket():
     topic = "my_ego_vehicle"
     header_bytes = str.encode(topic)
     header_length = len(header_bytes)
+    duration_change_lane = 1.5
+    decision_sequence = []
 
     try:
         socket_nanomsg = Sub0(dial=LOG_IP_PORT, recv_timeout=10000, send_timeout=10000)
@@ -56,7 +60,7 @@ def test_using_nanomsg_socket():
             if "initial_time" not in locals():
                 initial_time = timestamp
 
-            print("[INFO] timestamp %s" % timestamp)
+            print("[INFO] timestamp %s: %s" % (timestamp, dictionary))
             decision_command = {
                 "Timestamp": timestamp,
                 "Behavior": "KeepLane",
@@ -64,15 +68,41 @@ def test_using_nanomsg_socket():
                 "Acceleration": 1.2
             }
 
-            if (timestamp - initial_time) / 1000. > TIME_TO_RESTART:
+            t = (timestamp - initial_time) / 1000.
+            if TIME_TO_CHANGE_LANE < t < TIME_TO_CHANGE_LANE + duration_change_lane:
+                decision_command["Behavior"] = "LeftLaneChange"
+                decision_command["Duration"] = duration_change_lane
+
+            if t > TIME_TO_RESTART:
                 decision_command["Restart"] = True
                 initial_time = timestamp
+
+            decision_sequence.append((t, decision_command["Behavior"]))
 
             msg = json.dumps(decision_command).encode('unicode_escape')
             socket_control.send(msg)
     except:
         print("[ERROR] caught exception: ", sys.exc_info()[0])
         pass
+
+    plot_decision_sequence(decision_sequence)
+
+
+def plot_decision_sequence(decision_sequences):
+    plt.rcParams["font.family"] = "Times New Roman"
+    dictionary_decision_names = {"KeepLane": 0, "LeftLaneChange": 1, "RightLaneChange": 2}
+    decision_sequence = [dictionary_decision_names[d[1]] for d in decision_sequences]
+    time = [d[0] for d in decision_sequences]
+    f = plt.figure(figsize=(10, 5))
+    ax1 = f.add_subplot(111)
+
+    ax1.set_xlabel("Time [s]", fontsize=30)
+    ax1.set_ylabel("Decision Sequence", fontsize=30)
+    ax1.plot(time, decision_sequence, 'b-o', linewidth=5)
+    ax1.set_yticks([0, 1, 2])
+    ax1.set_yticklabels(["KeepLane", "LeftLaneChange", "RightLaneChange"])
+    plt.tight_layout()
+    plt.show()
 
 
 def main():
