@@ -1,6 +1,5 @@
-![alt text](https://github.com/romanroads/user_sample_code/blob/master/artifacts/ROMAN_ROADS_LOGO_COLOR.png?raw=true)
 <p align="center">
-  <img src="artifacts/ROMAN_ROADS_LOGO_COLOR.png" width="350" title="hover text">
+  <img src="artifacts/ROMAN_ROADS_LOGO_COLOR.png" width="500" title="ROMAN ROADS, INC.">
 </p>
 # User Sample Code
 This repo provides sample code, scripts that can be used to set up a typical Reinforcement Learning (RL),
