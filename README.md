@@ -1,5 +1,7 @@
-![alt text](https://github.com/romanroads/user_sample_code/blob/master/artifacts/ROMAN_ROADS_LOGO_COLOR.png?raw=true,width=10)
-![](https://github.com/romanroads/user_sample_code/blob/master/artifacts/ROMAN_ROADS_LOGO_COLOR.png | width=100)
+![alt text](https://github.com/romanroads/user_sample_code/blob/master/artifacts/ROMAN_ROADS_LOGO_COLOR.png?raw=true)
+<p align="center">
+  <img src="artifacts/ROMAN_ROADS_LOGO_COLOR.png" width="350" title="hover text">
+</p>
 # User Sample Code
 This repo provides sample code, scripts that can be used to set up a typical Reinforcement Learning (RL),
 Imitation Learning (IL) algorithm training environment where the training is performed against real human
