@@ -1,6 +1,7 @@
 <p align="center">
   <img src="artifacts/ROMAN_ROADS_LOGO_COLOR.png" width="500" title="ROMAN ROADS, INC.">
 </p>
+
 # User Sample Code
 This repo provides sample code, scripts that can be used to set up a typical Reinforcement Learning (RL),
 Imitation Learning (IL) algorithm training environment where the training is performed against real human
