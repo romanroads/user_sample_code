@@ -1,4 +1,8 @@
+![alt text](https://github.com/[romanroads]/[user_sample_code]/blob/[master]/artifacts/ROMAN_ROADS_LOGO_COLOR.png?raw=true)
 # User Sample Code
+This repo provides sample code, scripts that can be used to set up a typical Reinforcement Learning (RL),
+Imitation Learning (IL) algorithm training environment where the training is performed against real human
+driving behavioral data.
 
 ## Python users
 
@@ -7,7 +11,7 @@
 - Install Conda 
 
     You can download conda at: https://docs.conda.io/en/latest/miniconda.html.
-    We used conda 4.8.2 when setting up the tests
+    We used conda 4.8.2 when setting up the tests shown in this repo
 
 - Setup virtual environment for Python
     
@@ -17,7 +21,7 @@
     
             setup_env_windows.cmd
             
-        this assumes conda was installed to the default path.
+        this assumes conda was installed to the default path C:\ProgramData\Miniconda3\
             
     - Alternatively, if you want to manually setup the virtual environment, you can do
     , in anaconda prompt,
