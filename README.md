@@ -5,7 +5,7 @@
 # User Sample Code
 This repo provides sample code, scripts that can be used to set up a typical Reinforcement Learning (RL),
 Imitation Learning (IL) training environment, where the user algorithm is trained against real human
-driving behaviors provided by Element Platform ([Element Client Archive Download](https://https://www.romanroads.io/element-archive/))
+driving behaviors provided by Element Platform ([Element Client Archive Download](https://www.romanroads.io/element-archive/))
 
 ## Setup for Python users
 
