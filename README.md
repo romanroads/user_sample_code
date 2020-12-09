@@ -4,19 +4,20 @@
 
 # User Sample Code
 This repo provides sample code, scripts that can be used to set up a typical Reinforcement Learning (RL),
-Imitation Learning (IL) algorithm training environment where the training is performed against real human
-driving behavioral data.
+Imitation Learning (IL) training environment, where the user algorithm is trained against real human
+driving behaviors provided by Element Platform ([Element Client Archive Download](https://https://www.romanroads.io/element-archive/))
 
-## Python users
+## Setup for Python users
 
-### Windows Env Setup
+### Windows 10 OS
 
 - Install Conda 
 
-    You can download conda at: https://docs.conda.io/en/latest/miniconda.html.
-    We used conda 4.8.2 when setting up the tests shown in this repo
+    You can download conda at: https://docs.conda.io/en/latest/miniconda.html
+    
+    conda version > 4.8.2
 
-- Setup virtual environment for Python
+- Create Python virtual environment
     
     - We provide a script under user_sample_code/python folder 
     for setting up the necessary environment, either double click or
@@ -31,9 +32,9 @@ driving behavioral data.
             
             conda create -f environment_windows.yml
     
-- Execute sample code
+- Launch the sample code as well as Element
 
-    - Open an anaconda command prompt (search for "anaconda")
+    - Launch an anaconda command prompt (type "anaconda" in your Windows 10 search box)
         we recommend using "Run as administrator" to launcher anaconda 
         prompt
     
@@ -49,10 +50,19 @@ driving behavioral data.
     - Run the sample code now in anaconda prompt:
     
             cd user_sample_code/python
-            python test_training.py
+            python test_read_write.py
         
         this will read ego vehicle data from Element, and send testing decision sequence commands
         to Element. Ctl-C will terminate the python process.
+        
+            cd user_sample_code/python
+            python test_training.py
+            
+         this will set up a typical Reinforcement Learning environment which inherits from OpenAI Gym
+         environments. Users can build up their own policy learning / updating algorithms thereafter.
 
-### Linux Env Setup
+### Linux
+    TBD
+
+### Mac OS
     TBD
