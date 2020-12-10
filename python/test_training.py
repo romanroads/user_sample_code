@@ -32,7 +32,7 @@ def train():
 
     iters_so_far = 0
     max_iters = 2
-    timesteps_per_batch = 60
+    timesteps_per_batch = 80
 
     pi = MyPolicy(name="pi", ob_space=env.observation_space, ac_space=env.action_space, hid_size=2, num_hid_layers=2)
     seg_gen = segment_generator(pi, env, timesteps_per_batch, stochastic=True)

@@ -57,8 +57,24 @@ class ElementEnvironment(gym.Env):
         self.socket_nanomsg = Sub0(dial=log_ip_port, recv_timeout=10000, send_timeout=10000)
         self.socket_nanomsg.subscribe(self.topic)
         self.socket_control = Pair0(dial=control_ip_port, recv_timeout=100, send_timeout=100)
+
+        self.initialize_element()
+
         self.time_to_restart = 5
         self.initial_time = None
+
+    def initialize_element(self):
+        """
+        Note this initialization command will start spawning traffic and select the specified human demonstrators
+        for imitation learning
+        :return:
+        """
+        init_command = {
+            "StartLearning": True,
+            "AgentID": 1854
+        }
+        msg = json.dumps(init_command).encode('unicode_escape')
+        self.socket_control.send(msg)
 
     def step(self, action):
         packet = self.socket_nanomsg.recv()
@@ -70,15 +86,17 @@ class ElementEnvironment(gym.Env):
         if self.initial_time is None:
             self.initial_time = timestamp
 
+        self.done = dictionary["Restart"] == "True"
+        if self.done:
+            return self.observation, self.reward, self.done, self.info
+
+        t = (timestamp - self.initial_time) / 1000.
+
         print("[INFO] timestamp %s" % timestamp)
 
         # Note: craft your own reward function, observations here using data read from Element
         # ......
         self.reward = random.uniform(-1, 1)
-
-        self.done = dictionary["Restart"] == "True"
-        if self.done:
-            return self.observation, self.reward, self.done, self.info
 
         # Note: generate your actions, decisions here based upon your policy
         # ......
@@ -88,12 +106,6 @@ class ElementEnvironment(gym.Env):
             "Duration": 1.0,
             "Acceleration": 1.2
         }
-
-        t = (timestamp - self.initial_time) / 1000.
-
-        if t > self.time_to_restart:
-            decision_command["Restart"] = True
-            self.initial_time = timestamp
 
         # Note: we send out your decision sequence to Element environment to control the ego car
         msg = json.dumps(decision_command).encode('unicode_escape')
