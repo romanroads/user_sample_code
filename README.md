@@ -55,14 +55,14 @@ driving behaviors provided by Element Platform ([Element Client Archive Download
         this will read ego vehicle data from Element, and send test decision sequence commands
         to Element which request for a left lane-change. The decision sequence and the traffic configuration are shown below:
         
-<p align="center">
-  <img src="artifacts/LeftLaneChange.png" width="500" title="ROMAN ROADS, INC.">
-</p>
-
-<p align="center">
-  <img src="artifacts/LeftLaneChangeScene.png" width="500" title="ROMAN ROADS, INC.">
-</p>
+        <p align="center">
+          <img src="artifacts/LeftLaneChange.png" width="500" title="ROMAN ROADS, INC.">
+        </p>
         
+        <p align="center">
+          <img src="artifacts/LeftLaneChangeScene.png" width="500" title="ROMAN ROADS, INC.">
+        </p>
+                
             cd user_sample_code/python
             python test_training.py
             
